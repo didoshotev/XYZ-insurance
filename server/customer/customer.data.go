@@ -2,15 +2,9 @@ package customer
 
 import (
 	"database/sql"
-	"sync"
 
 	"github.com/didoshotev/XYZ-insurance/database"
 )
-
-var customerMap = struct {
-	sync.RWMutex
-	m map[int]Customer
-}{m: make(map[int]Customer)}
 
 func getCustomerList() ([]Customer, error) {
 	results, err := database.DbConn.Query(`SELECT customerId,

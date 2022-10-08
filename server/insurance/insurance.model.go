@@ -1,17 +1,8 @@
-package models
+package insurance
 
 type Insurance struct {
-	ID           int
-	CustomerID   int
-	InsuranceID  int
-	Details      string
-	FinalPrice   float64
-	Duration     int
-	SignUpDate   string
-	ValidityDate string
+	InsuranceId int     `json:"insuranceId"`
+	Name        string  `json:"name"`
+	Type        string  `json:"type"`
+	Price       float64 `json:"price"`
 }
-
-var (
-	insurancesCollection []*Insurance
-	nextInsuranceID      = 1
-)
