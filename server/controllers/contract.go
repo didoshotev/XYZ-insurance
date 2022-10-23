@@ -68,6 +68,7 @@ func (cc *contractController) getContract(id int, w http.ResponseWriter, r *http
 		return
 	}
 	encodeResponseAsJSON(contract, w)
+	w.WriteHeader(http.StatusOK)
 }
 
 func (cc *contractController) createContractHandler(w http.ResponseWriter, r *http.Request) {
@@ -84,6 +85,7 @@ func (cc *contractController) createContractHandler(w http.ResponseWriter, r *ht
 		return
 	}
 	encodeResponseAsJSON(contract, w)
+	w.WriteHeader(http.StatusOK)
 }
 
 func (cc *contractController) editContractHandler(id int, w http.ResponseWriter, r *http.Request) {
@@ -106,6 +108,7 @@ func (cc *contractController) editContractHandler(id int, w http.ResponseWriter,
 		return
 	}
 	encodeResponseAsJSON(contract, w)
+	w.WriteHeader(http.StatusOK)
 }
 
 func (cc *contractController) deleteContractHandler(id int, w http.ResponseWriter, r *http.Request) {

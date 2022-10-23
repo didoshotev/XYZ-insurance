@@ -138,14 +138,6 @@ func productHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func main() {
-	controllers.RegisterControllers()
-
-	http.HandleFunc("/products", productsHandler)
-	http.HandleFunc("/products/", productHandler)
-	http.ListenAndServe(":5000", nil)
-}
-
 func getNextID() int {
 	highestID := -1
 	for _, product := range productList {
@@ -163,4 +155,12 @@ func findProductByID(productID int) (*Product, int) {
 		}
 	}
 	return nil, -1
+}
+
+func main() {
+	controllers.RegisterControllers()
+
+	http.HandleFunc("/products", productsHandler)
+	http.HandleFunc("/products/", productHandler)
+	http.ListenAndServe(":5000", nil)
 }
