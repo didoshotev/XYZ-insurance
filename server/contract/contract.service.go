@@ -1,4 +1,4 @@
-package controllers
+package contract
 
 import (
 	"encoding/json"
@@ -6,7 +6,7 @@ import (
 	"regexp"
 	"strconv"
 
-	"github.com/didoshotev/XYZ-insurance/models"
+	"github.com/didoshotev/XYZ-insurance/common"
 )
 
 type contractController struct {
@@ -15,6 +15,7 @@ type contractController struct {
 
 func (cc contractController) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path == "/contracts" {
+		// contractsList := getContractList()
 		switch r.Method {
 		case http.MethodGet:
 			cc.getContracts(w, r)
@@ -56,18 +57,18 @@ func newContractController() *contractController {
 
 // cc methods
 func (cc *contractController) getContracts(w http.ResponseWriter, r *http.Request) {
-	contracts := models.GetContracts()
-	encodeResponseAsJSON(contracts, w)
+	contracts := getContractList()
+	common.EncodeResponseAsJSON(contracts, w)
 }
 
 func (cc *contractController) getContract(id int, w http.ResponseWriter, r *http.Request) {
-	contract, err := models.GetContractByID(id)
+	contract, err := getContractbyId(id)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
 		return
 	}
-	encodeResponseAsJSON(contract, w)
+	common.EncodeResponseAsJSON(contract, w)
 	w.WriteHeader(http.StatusOK)
 }
 
@@ -78,13 +79,13 @@ func (cc *contractController) createContractHandler(w http.ResponseWriter, r *ht
 		w.Write([]byte("could not parse user object"))
 		return
 	}
-	contract, err = models.CreateContract(contract)
+	contract, err = CreateContract(contract)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
 		return
 	}
-	encodeResponseAsJSON(contract, w)
+	common.EncodeResponseAsJSON(contract, w)
 	w.WriteHeader(http.StatusOK)
 }
 
@@ -101,18 +102,18 @@ func (cc *contractController) editContractHandler(id int, w http.ResponseWriter,
 		return
 	}
 
-	contract, err = models.UpdateContract(contract)
+	contract, err = UpdateContract(contract)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
 		return
 	}
-	encodeResponseAsJSON(contract, w)
+	common.EncodeResponseAsJSON(contract, w)
 	w.WriteHeader(http.StatusOK)
 }
 
 func (cc *contractController) deleteContractHandler(id int, w http.ResponseWriter, r *http.Request) {
-	err := models.DeleteContract(id)
+	err := DeleteContract(id)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
@@ -121,12 +122,12 @@ func (cc *contractController) deleteContractHandler(id int, w http.ResponseWrite
 	w.WriteHeader(http.StatusOK)
 }
 
-func (uc *contractController) parseContractRequest(r *http.Request) (models.Contract, error) {
+func (uc *contractController) parseContractRequest(r *http.Request) (Contract, error) {
 	dec := json.NewDecoder(r.Body)
-	var contract models.Contract
+	var contract Contract
 	err := dec.Decode(&contract)
 	if err != nil {
-		return models.Contract{}, err
+		return Contract{}, err
 	}
 	return contract, nil
 }

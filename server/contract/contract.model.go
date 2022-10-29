@@ -1,4 +1,4 @@
-package models
+package contract
 
 import (
 	"errors"
@@ -6,11 +6,11 @@ import (
 )
 
 type Contract struct {
-	ID         int
-	PersonName string
-	FamilyName string
-	DOB        string
-	Rating     int
+	ID         int    `json:"id"`
+	PersonName string `json:"personName"`
+	FamilyName string `json:"familyName"`
+	DOB        string `json:"dob"`
+	Rating     int    `json:"rating"`
 }
 
 var (
