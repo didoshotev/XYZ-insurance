@@ -1,13 +1,9 @@
-package models
+package customer
 
 type Customer struct {
-	ID    int
-	Name  string
-	Type  string
-	Price float64
+	CustomerId int    `json:"customerId"`
+	PersonName string `json:"personName"`
+	FamilyName string `json:"familyName"`
+	DOB        string `json:"dob"`
+	Rating     int    `json:"rating"`
 }
-
-var (
-	customersCollection []*Customer
-	nextCustomerID      = 1
-)
