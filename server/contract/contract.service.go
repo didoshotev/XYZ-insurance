@@ -19,6 +19,9 @@ func (contrController contractController) ServeHTTP(w http.ResponseWriter, r *ht
 		switch r.Method {
 		case http.MethodGet:
 			contrController.getContracts(w, r)
+		case http.MethodOptions:
+			w.WriteHeader(http.StatusOK)
+			return
 		default:
 			w.WriteHeader(http.StatusNotImplemented)
 		}
@@ -35,6 +38,9 @@ func (contrController contractController) ServeHTTP(w http.ResponseWriter, r *ht
 		switch r.Method {
 		case http.MethodGet:
 			contrController.getContract(contractId, w, r)
+		case http.MethodOptions:
+			w.WriteHeader(http.StatusOK)
+			return
 		case http.MethodPut:
 			contrController.updateContract(contractId, w, r)
 		default:
