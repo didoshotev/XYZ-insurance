@@ -9,6 +9,7 @@ import (
 func RegisterContractControllers() {
 	contractController := newContractController()
 
+	// http.Handle("/contracts", common.CORSMiddleware(common.AuthMiddleware(*contractController)))
 	http.Handle("/contracts", common.CORSMiddleware(*contractController))
 	http.Handle("/contract", common.CORSMiddleware(*contractController))
 	http.Handle("/contract/", common.CORSMiddleware(*contractController))
