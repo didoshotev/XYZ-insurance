@@ -3,6 +3,7 @@ package main
 import (
 	"net/http"
 
+	"github.com/didoshotev/XYZ-insurance/auth"
 	"github.com/didoshotev/XYZ-insurance/contract"
 	"github.com/didoshotev/XYZ-insurance/customer"
 	"github.com/didoshotev/XYZ-insurance/database"
@@ -12,6 +13,7 @@ import (
 
 func main() {
 	database.SetupDatabase()
+	auth.RegisterAuthControllers()
 	customer.RegisterCustomerControllers()
 	insurance.RegisterInsuranceControllers()
 	contract.RegisterContractControllers()

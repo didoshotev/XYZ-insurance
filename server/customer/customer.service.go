@@ -21,6 +21,9 @@ func (custController customerController) ServeHTTP(w http.ResponseWriter, r *htt
 			custController.getCustomers(w, r)
 		case http.MethodPost:
 			custController.createCustomer(w, r)
+		case http.MethodOptions:
+			w.WriteHeader(http.StatusOK)
+			return
 		default:
 			w.WriteHeader(http.StatusNotImplemented)
 		}

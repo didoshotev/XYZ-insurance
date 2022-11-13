@@ -22,6 +22,9 @@ func (ic InsuranceController) ServeHTTP(w http.ResponseWriter, r *http.Request) 
 			ic.getInsurances(w, r)
 		case http.MethodPost:
 			ic.createInsurance(w, r)
+		case http.MethodOptions:
+			w.WriteHeader(http.StatusOK)
+			return
 		default:
 			w.WriteHeader(http.StatusNotImplemented)
 		}
