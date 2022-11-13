@@ -48,10 +48,7 @@ export const Customer = () => {
                 method: 'post',
                 url: 'http://localhost:5000/customers',
                 data: values,
-            }).then(res => {
-                console.log('success: ', res)
-            })
-                .catch(err => {
+            }).catch(err => {
                     console.log('Could not create a customer');
                     console.error('error: ', err);
                 })

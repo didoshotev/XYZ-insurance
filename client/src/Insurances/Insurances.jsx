@@ -45,14 +45,11 @@ export const Insurances = () => {
             axios({
                 method: 'post',
                 url: 'http://localhost:5000/insurances',
-                data: {...values, price: +values.price},
-            }).then(res => {
-                console.log('success: ', res)
+                data: { ...values, price: +values.price },
+            }).catch(err => {
+                console.log('Could not create an Insurance');
+                console.error('error: ', err);
             })
-                .catch(err => {
-                    console.log('Could not create an Insurance');
-                    console.error('error: ', err);
-                })
         }
     });
 

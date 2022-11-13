@@ -4,7 +4,7 @@ import { useEffect } from "react"
 import { useState } from "react"
 import { Header } from "../components/Header/Header"
 
-export const Contracts = () => { 
+export const Contracts = () => {
     const [contracts, setContracts] = useState([])
 
     useEffect(() => {
@@ -18,8 +18,6 @@ export const Contracts = () => {
             console.error(err);
         })
     }, [])
-
-    console.log('contracts: ', contracts);
 
     return (
         <>
